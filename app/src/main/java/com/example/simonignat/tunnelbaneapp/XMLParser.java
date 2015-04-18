@@ -1,10 +1,11 @@
 package com.example.simonignat.tunnelbaneapp;
+
 import android.location.Location;
-import android.util.Log;
-import android.widget.TextView;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -32,17 +33,22 @@ public class XMLParser {
             switch (event) {
                 case XmlPullParser.START_TAG:
                     tag = parser.getName();
-                    if(tag.equals("Site"))
+                    if(tag.equals("Site")) {
                         parseSiteData(parser);
-                    break;
+                        //Log.w("parser")
+                        Location loc =new Location(locationName);
+                        loc.setLatitude(locationY);
+                        loc.setLongitude(locationX);
+                        return new Site(siteId, locationName,loc);
+                    } break;
             }
             event = parser.next();
         }
-        return  new Site(siteId,name,new Location(name));
+        return null;
     }
 
     private int siteId;
-    private String name;
+    private String locationName;
     private int locationX;
     private int locationY;
     private void parseSiteData(XmlPullParser parser) throws XmlPullParserException,IOException{
@@ -59,8 +65,10 @@ public class XMLParser {
                 case XmlPullParser.TEXT:
                     if (tag.equals("SiteId"))
                         siteId = Integer.valueOf(parser.getText());
+
                     if (tag.equals("Name"))
-                        time = parser.getText();
+                        locationName = parser.getText();
+
                     if (tag.equals("X")) {
                         locationX = Integer.valueOf(parser.getText());
                     }
