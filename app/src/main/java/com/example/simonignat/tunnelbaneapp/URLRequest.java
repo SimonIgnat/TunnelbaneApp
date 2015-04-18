@@ -42,6 +42,7 @@ public class URLRequest extends AsyncTask{
             Log.w("Response Error", "error1");
             e1.printStackTrace();
         }
+        assert response != null;
         HttpEntity entity = response.getEntity();
         InputStream is = null; // Create an InputStream with the response
         try {
@@ -53,7 +54,8 @@ public class URLRequest extends AsyncTask{
         }
         BufferedReader reader = null;
         try {
-            Log.w("BufferedReader started", "BUfferedReader")
+            Log.w("BufferedReader started", "BUfferedReader");
+            assert is != null;
             reader = new BufferedReader(new InputStreamReader(is, "utf-8"), 8);
         } catch (UnsupportedEncodingException e) {
             Log.w("BufferedReader Error", "error3");
@@ -64,6 +66,7 @@ public class URLRequest extends AsyncTask{
 
 
         try {
+            assert reader != null;
             while ((line = reader.readLine()) != null)
                 sb.append(line);
         } catch (IOException e4) {

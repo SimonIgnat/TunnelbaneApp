@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="Title">SL-APP</string>
+    <string name="siteEntryLabel">Enter site</string>
+    <string name="enterButtonLabel">Enter</string>
+    <string name="title_activity_departure">DepartureActivity</string>
+    <string name="SiteString">Tekniska Högskolan</string>
 </resources>

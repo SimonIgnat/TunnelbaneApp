@@ -10,22 +10,35 @@
         android:layout_height="wrap_content"
         android:id="@+id/scrollView" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Small Text"
-            android:id="@+id/textView"
-            android:layout_alignParentTop="true" />
     </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Title"
+        android:id="@+id/textView"
+        android:layout_below="@+id/scrollView"
+        android:layout_centerHorizontal="true"
+        android:textSize="100dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:text="@string/siteEntryLabel"
+        android:inputType="text"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="@string/enterButtonLabel"
         android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/scrollView"
-        android:layout_toEndOf="@+id/scrollView"
-        android:layout_marginBottom="127dp" />
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="79dp" />
+
 </RelativeLayout>

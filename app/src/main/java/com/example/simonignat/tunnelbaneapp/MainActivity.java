@@ -2,6 +2,7 @@ package com.example.simonignat.tunnelbaneapp;
 
 import android.annotation.TargetApi;
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -31,55 +33,54 @@ import java.net.URL;
 
 public class MainActivity extends ActionBarActivity {
 
-    String inputLine = null;
 
-    String outputLine = null;
-    URL oracle = null;
-
-
-    URLRequest apiHandle = null;
-    String outputString = "hej";
+    static Controller controller = new Controller();
     TextView tv;
+    Model m;
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv = (TextView) findViewById(R.id.textView);
 
-        Button b = (Button) findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener() {
+        Button btn = (Button)findViewById(R.id.button);
+
+
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv.setText("Click" + outputString);
+
+                String userInput;
+
+                userInput = ((EditText)findViewById(R.id.editText)).getText().toString();
+
+                Intent intent = new Intent(MainActivity.this, DepartureActivity.class);
+
+                Bundle b = new Bundle();
+
+                Model m = new Model(userInput);
+
+                intent.putExtra("Model", (java.io.Serializable) m);
+
+
+                startActivity(intent);
+
+                finish();
             }
         });
 
+        //tv = (TextView) findViewById(R.id.textView);
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
+        //Model m = new Model();
 
-                    apiHandle = new URLRequest("http://api.sl.se/api2/realtimedepartures.xml?key=985c280f5aab414d9584b8a58230a386&siteid=9192&timewindow=1");
+        //Simulation s = new Simulation(m,v);
 
-                    outputString = apiHandle.getResponseFromUrl();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-         thread.start();
-
-
-    }
-
+       }
 
 
     @Override
