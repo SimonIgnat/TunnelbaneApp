@@ -1,5 +1,6 @@
 package com.example.simonignat.tunnelbaneapp;
 
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.io.ByteArrayInputStream;
