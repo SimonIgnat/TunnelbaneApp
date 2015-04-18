@@ -8,4 +8,7 @@
     <string name="enterButtonLabel">Enter</string>
     <string name="title_activity_departure">DepartureActivity</string>
     <string name="SiteString">Tekniska Högskolan</string>
+    <string name="busText">Large Text</string>
+    <string name="metroText">Large Text</string>
+    <string name="trainText">Large Text</string>
 </resources>

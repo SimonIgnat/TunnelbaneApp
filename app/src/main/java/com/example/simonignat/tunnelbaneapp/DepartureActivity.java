@@ -16,11 +16,13 @@ public class DepartureActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_departure);
 
-        Model m = getIntent().getSerializableExtra("MyClass");;
+        Model m = (Model)getIntent().getParcelableExtra("Model");
 
         siteTitle = (TextView) findViewById(R.id.SiteTitle);
 
-        siteTitle.setText(currentSite);
+        siteTitle.setText(m.currentSite.getName());
+
+
 
     }
 

@@ -5,6 +5,7 @@ import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,7 +66,7 @@ public class MainActivity extends ActionBarActivity {
 
                 Model m = new Model(userInput);
 
-                intent.putExtra("Model", (java.io.Serializable) m);
+                intent.putExtra("Model", (Parcelable) m);
 
 
                 startActivity(intent);

@@ -20,4 +20,35 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/busText"
+        android:id="@+id/busView"
+        android:layout_below="@+id/SiteTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="87dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/metroText"
+        android:id="@+id/metroView"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/trainText"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/metroView"
+        android:layout_alignLeft="@+id/busView"
+        android:layout_alignStart="@+id/busView"
+        android:layout_marginTop="93dp" />
+
 </RelativeLayout>
