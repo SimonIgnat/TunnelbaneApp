@@ -9,7 +9,10 @@ public class Site {
     int siteId;
     String name;
     Location location;
-    public Site(){
+    public Site(int siteId,String name,Location location){
+        this.siteId=siteId;
+        this.name=name;
+        this.location=location;
     }
     public int getId(){
         return siteId;
