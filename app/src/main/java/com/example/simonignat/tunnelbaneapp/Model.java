@@ -2,6 +2,8 @@ package com.example.simonignat.tunnelbaneapp;
 
 import android.util.Log;
 
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -21,6 +23,8 @@ public class Model{
     String departuresXMLStream;
 
     String userInput;
+
+    XMLParser xmlParser = new XMLParser();
 
    // final String UI = null;
     private int timeStep;
@@ -55,7 +59,7 @@ public class Model{
 
                     siteXMLStream = siteAPIHandle.getResponseFromUrl();
 
-                    setCurrentSite(XMLParser.getSiteInfo(siteXMLStream));
+                    setCurrentSite(xmlParser.getSiteInfo(new ByteArrayInputStream(siteXMLStream.getBytes(StandardCharsets.UTF_8))));
 
                 }catch(Exception e) {
                     e.printStackTrace();
@@ -80,8 +84,7 @@ public class Model{
                     departuresAPIHandle = new URLRequest(departureURL);
 
                     departuresXMLStream = departuresAPIHandle.getResponseFromUrl();
-
-                    setTransports(XMLParser.getDepartures(departuresXMLStream));
+                    setTransports(xmlParser.getDepartures(new ByteArrayInputStream(departuresXMLStream.getBytes(StandardCharsets.UTF_8))));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

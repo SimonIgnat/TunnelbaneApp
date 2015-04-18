@@ -31,7 +31,7 @@ public class DepartureURLCreator {
                 "?key=" +
                 APIKey +
                 "&siteid=" +
-                (String)departureSite.getId() +
+                departureSite.getId() +
                 "&timewindow=" +
                 timeSpan;
 
