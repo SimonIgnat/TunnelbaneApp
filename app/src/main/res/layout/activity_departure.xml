@@ -37,15 +37,15 @@
         android:text="@string/metroText"
         android:id="@+id/metroView"
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4" />
+        android:layout_alignLeft="@+id/trainView"
+        android:layout_alignStart="@+id/trainView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/trainText"
-        android:id="@+id/textView4"
+        android:id="@+id/trainView"
         android:layout_below="@+id/metroView"
         android:layout_alignLeft="@+id/busView"
         android:layout_alignStart="@+id/busView"

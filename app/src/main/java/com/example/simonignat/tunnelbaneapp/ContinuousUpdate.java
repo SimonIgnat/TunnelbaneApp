@@ -7,14 +7,12 @@ import android.util.Log;
  */
 
 
-class Simulation extends Thread{
+class ContinuousUpdate extends Thread{
 
-    static SLView view;
     static Model model;
 
 
-    Simulation(Model m, SLView v){
-        view = v;
+    ContinuousUpdate(Model m){
         model = m;
 
         startSimulation();

@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 public class DepartureActivity extends ActionBarActivity {
 
-    TextView siteTitle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,11 +16,23 @@ public class DepartureActivity extends ActionBarActivity {
 
         Model m = (Model)getIntent().getParcelableExtra("Model");
 
-        siteTitle = (TextView) findViewById(R.id.SiteTitle);
-
-        siteTitle.setText(m.currentSite.getName());
+        Site s = m.currentSite;
 
 
+        TextView siteTitle = (TextView)findViewById(R.id.SiteTitle);
+        siteTitle.setText(s.getName());
+
+
+        TextView busText = (TextView)findViewById(R.id.busView);
+        TextView metroText = (TextView)findViewById(R.id.metroView);
+        TextView trainText = (TextView)findViewById(R.id.trainView);
+
+
+        busText.setText(m.nextBusToString());
+
+        metroText.setText(m.nextMetroToString());
+
+        trainText.setText(m.nextTrainToString());
 
     }
 

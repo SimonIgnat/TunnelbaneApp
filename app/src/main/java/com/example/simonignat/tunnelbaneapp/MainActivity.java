@@ -62,8 +62,6 @@ public class MainActivity extends ActionBarActivity {
 
                 Intent intent = new Intent(MainActivity.this, DepartureActivity.class);
 
-                Bundle b = new Bundle();
-
                 Model m = new Model(userInput);
 
                 intent.putExtra("Model", (Parcelable) m);
