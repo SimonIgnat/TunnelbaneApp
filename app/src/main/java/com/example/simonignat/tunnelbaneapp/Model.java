@@ -20,6 +20,8 @@ public class Model{
     String siteXMLStream;
     String departuresXMLStream;
 
+    String userInput;
+
    // final String UI = null;
     private int timeStep;
 
@@ -27,8 +29,9 @@ public class Model{
     Model(String uI){
 
         //final String userInput = uI;
-        this.currentSite = new Site(9000, "Central Stationen", null);
+        //this.currentSite = new Site(9000, "Central Stationen", null);
 
+        setUserInput(uI);
         initSite();
 
     }
@@ -52,14 +55,11 @@ public class Model{
 
                     siteXMLStream = siteAPIHandle.getResponseFromUrl();
 
-                    this.currentSite = XMLParser.getSiteInfo(siteXMLStream);
+                    setCurrentSite(XMLParser.getSiteInfo(siteXMLStream));
 
                 }catch(Exception e) {
                     e.printStackTrace();
                 }
-
-
-
             }
         });
 
@@ -105,7 +105,7 @@ public class Model{
 
     }
 
-    public String[] nextBusToString(){
+    public String nextBusToString(){
         Bus b = null;
 
         for(Transport t: transports){
@@ -115,11 +115,11 @@ public class Model{
                 e.printStackTrace();
             }
         }
-        String[] strings = {b.getName(), b.getTime()};
-        return strings;
+        String string = b.getName() + b.getTime();
+        return string;
     }
 
-    public String[] nextMetroToString(){
+    public String nextMetroToString(){
         Metro m = null;
 
         for(Transport t: transports){
@@ -129,22 +129,26 @@ public class Model{
                 e.printStackTrace();
             }
         }
-        String[] strings = {m.getName(), m.getTime()};
-        return strings;
+        String string = m.getName() + m.getTime();
+        return string;
     }
 
-    public String[] nextTrainToString(){
+    public String nextTrainToString(){
         Metro tr = null;
 
-        for(Transport t: transports){
+        for(Transport t: transports) {
             try {
                 tr = (Metro) t;
-            }catch(ClassCastException e){
+            } catch (ClassCastException e) {
                 e.printStackTrace();
             }
         }
-        String[] strings = {tr.getName(), tr.getTime()};
-        return strings;
+
+        String string = tr.getName() + tr.getTime();
+
+
+
+        return string;
     }
 
 
@@ -160,5 +164,13 @@ public class Model{
 
     void setTransports(ArrayList<Transport> transport){
         transports = transport;
+    }
+
+    public void setUserInput(String userinput) {
+        this.userInput = userinput;
+    }
+
+    public String getUserInput(){
+        return this.userInput;
     }
 }
