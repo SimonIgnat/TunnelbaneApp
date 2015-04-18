@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class XMLParser {
 
+
+    // HEJ
     private String destination = "";
     private String lineNumber = "";
     private String time = "";
