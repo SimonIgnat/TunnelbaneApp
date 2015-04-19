@@ -91,7 +91,7 @@ public class XMLParser {
 
 
 
-    public ArrayList<Transport> parse(InputStream stream) throws XmlPullParserException, IOException {
+    public ArrayList<Transport> getDepartures(InputStream stream) throws XmlPullParserException, IOException {
 
         XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
         XmlPullParser parser = xmlFactoryObject.newPullParser();

@@ -1,5 +1,6 @@
 package com.example.simonignat.tunnelbaneapp;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,14 +8,18 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 
-public class DepartureActivity extends ActionBarActivity {
+public class DepartureActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_departure);
 
-        Model m = (Model)getIntent().getParcelableExtra("Model");
+        //ContinuousUpdate cu = (ContinuousUpdate)getIntent().getParcelableExtra("ContUpdate");
+
+
+        Model m = ContinuousUpdate.model;
+        //Model m = (Model)getIntent().getParcelableExtra("Model");
 
         Site s = m.currentSite;
 

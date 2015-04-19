@@ -7,6 +7,8 @@ import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+import static java.nio.charset.StandardCharsets.*;
+
 /**
  * Created by simonignat on 2015-04-18.
  */
@@ -51,7 +53,7 @@ public class Model{
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String siteURL = SiteURLCreator.createURL("Stockholms Centralstation");
+                String siteURL = SiteURLCreator.createURL(getUserInput());
 
 
                 try {

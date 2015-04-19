@@ -49,6 +49,10 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
 
+
+
+
+
         Button btn = (Button)findViewById(R.id.button);
 
 
@@ -64,7 +68,11 @@ public class MainActivity extends ActionBarActivity {
 
                 Model m = new Model(userInput);
 
-                intent.putExtra("Model", (Parcelable) m);
+                ContinuousUpdate cu = new ContinuousUpdate(m);
+
+
+
+                //intent.putExtra("ContUpdate", (Parcelable) cu);
 
 
                 startActivity(intent);
@@ -72,13 +80,6 @@ public class MainActivity extends ActionBarActivity {
                 finish();
             }
         });
-
-        //tv = (TextView) findViewById(R.id.textView);
-
-        //Model m = new Model();
-
-        //Simulation s = new Simulation(m,v);
-
        }
 
 
