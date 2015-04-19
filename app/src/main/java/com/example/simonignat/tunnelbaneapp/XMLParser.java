@@ -17,7 +17,7 @@ public class XMLParser {
     private String lineNumber = "";
     private String time = "";
     private String tag = "";
-    private ArrayList<Transport> transport =new ArrayList<Transport>();
+    private ArrayList<Transport> transport;
 
     public XMLParser(){
     }
@@ -92,7 +92,7 @@ public class XMLParser {
 
 
     public ArrayList<Transport> getDepartures(InputStream stream) throws XmlPullParserException, IOException {
-
+        transport =new ArrayList<Transport>();
         XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
         XmlPullParser parser = xmlFactoryObject.newPullParser();
 
