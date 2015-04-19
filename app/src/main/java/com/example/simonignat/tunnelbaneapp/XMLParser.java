@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 public class XMLParser {
 
-
-    // HEJ
     private String destination = "";
     private String lineNumber = "";
     private String time = "";
@@ -93,7 +91,7 @@ public class XMLParser {
 
 
 
-    public ArrayList<Transport> getDepartures(InputStream stream) throws XmlPullParserException, IOException {
+    public ArrayList<Transport> parse(InputStream stream) throws XmlPullParserException, IOException {
 
         XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
         XmlPullParser parser = xmlFactoryObject.newPullParser();

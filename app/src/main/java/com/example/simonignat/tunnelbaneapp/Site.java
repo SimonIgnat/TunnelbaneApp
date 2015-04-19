@@ -20,6 +20,9 @@ public class Site {
     public String getName(){
         return name;
     }
+    public String toString(){
+        return "siteId: "+siteId+", name: "+name+",Location: "+location.toString();
+    }
     public Location getLocation(){
         return location;
     }
