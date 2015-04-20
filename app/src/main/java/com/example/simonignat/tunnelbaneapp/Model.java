@@ -15,6 +15,10 @@ import static java.nio.charset.StandardCharsets.*;
  */
 
 
+
+// Updated 20:15
+
+    
 public class Model {
 
 
@@ -79,6 +83,7 @@ public class Model {
                     siteXMLStream = siteAPIHandle.getResponseFromUrl();
 
                     Site test = xmlParser.getSiteInfo(new ByteArrayInputStream(siteXMLStream.getBytes(StandardCharsets.UTF_8)));
+
 
                     Log.w("test", test.toString());
 

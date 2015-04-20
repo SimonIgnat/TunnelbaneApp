@@ -104,7 +104,7 @@ public class URLRequest extends AsyncTask{
         return  resString;
     }
 
-    
+
     /**
      * <Fancy text></Fancy>
      *
