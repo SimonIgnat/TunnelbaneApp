@@ -71,14 +71,17 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 String userInput;
 
-                userInput = ((EditText)findViewById(R.id.editText)).getText().toString();
+                userInput = ((EditText) findViewById(R.id.editText)).getText().toString();
+
                 Model m = new Model(userInput);
 
-                siteTitle.setText(userInput);
+
+                siteTitle.setText("Slussen");
 
                 busText.setText(m.nextBusToString());
                 metroText.setText(m.nextMetroToString());
                 trainText.setText(m.nextTrainToString());
+
             }
         });
        }

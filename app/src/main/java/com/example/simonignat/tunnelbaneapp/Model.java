@@ -58,17 +58,22 @@ public class Model {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String siteURL = SiteURLCreator.createURL(getUserInput());
+
+                //String siteURL = SiteURLCreator.createURL(getUserInput());
 
 
                 try {
 
                     //HARDCODED FOR NOW
-                    //siteURL = "http://api.sl.se/api2/typeahead.xml?key=f7a9ba6bee8a46f9a8d07629719d3935&searchstring=slussen&stationsonly=true&maxresults=10";
+                    String siteURL = "http://api.sl.se/api2/typeahead.xml?key=f7a9ba6bee8a46f9a8d07629719d3935&searchstring=slussen&stationsonly=true&maxresults=10";
 
                     siteAPIHandle = new URLRequest(siteURL);
 
                     siteXMLStream = siteAPIHandle.getResponseFromUrl();
+
+                    Site test = xmlParser.getSiteInfo(new ByteArrayInputStream(siteXMLStream.getBytes(StandardCharsets.UTF_8)));
+
+                    Log.w("test", test.toString());
 
                     setCurrentSite(xmlParser.getSiteInfo(new ByteArrayInputStream(siteXMLStream.getBytes(StandardCharsets.UTF_8))));
 
@@ -106,6 +111,7 @@ public class Model {
 
                     setTransports(xmlParser.getDepartures(new ByteArrayInputStream(departuresXMLStream.getBytes(StandardCharsets.UTF_8))));
 
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -131,8 +137,6 @@ public class Model {
 
         for (Transport t : transports) {
             if (t.getClass().equals(Metro.class)) {
-
-
                 String string = "Tunnelbana: " + t.getName() + "  -  "  + t.getTime();
                 return string;
             }
@@ -156,9 +160,7 @@ public class Model {
 
         for (Transport t : transports) {
             if (t.getClass().equals(Train.class)) {
-
-                String string =  "Pendeltåg: " + t.getName() + "  -  "  + t.getTime();
-                return string;
+                return "Pendeltåg: " + t.getName() + "  -  "  + t.getTime();
             }
         }
     return " ";
