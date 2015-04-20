@@ -13,6 +13,8 @@ import static java.nio.charset.StandardCharsets.*;
 /**
  * Created by simonignat on 2015-04-18.
  */
+
+
 public class Model {
 
 
