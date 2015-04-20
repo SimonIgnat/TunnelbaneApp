@@ -88,7 +88,7 @@ public class MainActivity extends ActionBarActivity {
                 imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 
 
-                Model m = new Model(userInput, busText, metroText, siteTitle);
+                Model m = new Model(userInput, busText, metroText);
 
 
 

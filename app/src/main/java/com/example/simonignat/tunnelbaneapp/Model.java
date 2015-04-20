@@ -15,26 +15,16 @@ import static java.nio.charset.StandardCharsets.*;
  */
 
 
-
-// Updated 20:15
-
-
 public class Model {
 
+    //Push Test malte!
+    ArrayList<Transport> transports = new ArrayList<Transport>();
 
-    static ArrayList<Transport> transports = new ArrayList<Transport>();
-
-
-    Boolean siteInitialized = false;
 
     Site currentSite;
 
     URLRequest siteAPIHandle = null;
     URLRequest departuresAPIHandle = null;
-
-    TextView busText;
-    TextView metroText;
-    TextView titleText;
 
     String outputString = "hej";
 
@@ -43,36 +33,32 @@ public class Model {
 
     String userInput;
 
-   XMLParser xmlParser = new XMLParser();
+    XMLParser xmlParser = new XMLParser();
 
     // final String UI = null;
     private int timeStep = 50;
 
 
+    TextView busText;
+    TextView metroText;
+    TextView siteTitle;
 
-    Model(String uI, TextView bV, TextView mV, TextView sT) {
+    Model(String uI, TextView busText,TextView metroText) {
         //final String userInput = uI;
         //this.currentSite = new Site(9000, "Central Stationen", null);
-
-        this.busText = bV;
-        this.metroText = mV;
-        this.titleText = sT;
+        this.busText=busText;
+        this.metroText=metroText;
         setUserInput(uI);
+        initSite();
 
     }
 
+    void initSite() {
 
-    /**
-     * <Fancy text></Fancy>
-     *
-     * @throws
-     *
-     * @param time The display time
-     * @return Time integer
-     */
-    void updateDepartures() {
-
-
+        /**
+         * BEHÖVS TRÅDAR????
+         *
+         */
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -83,9 +69,8 @@ public class Model {
 
                 try {
 
-                 //String siteURL = SiteURLCreator.createURL(getUserInput());
-                 //HARDCODED FOR NOW
-                    String siteURL = "http://api.sl.se/api2/typeahead.xml?key=f7a9ba6bee8a46f9a8d07629719d3935&searchstring=tekniskahogskolan&stationsonly=true&maxresults=10";
+                    //HARDCODED FOR NOW
+                    String siteURL = "http://api.sl.se/api2/typeahead.xml?key=f7a9ba6bee8a46f9a8d07629719d3935&searchstring=slussen&stationsonly=true&maxresults=10";
 
                     siteAPIHandle = new URLRequest(siteURL);
 
@@ -98,10 +83,33 @@ public class Model {
                     setCurrentSite(xmlParser.getSiteInfo(new ByteArrayInputStream(siteXMLStream.getBytes(StandardCharsets.UTF_8))));
 
 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        thread.start();
 
 
 
-                    String departureURL = DepartureURLCreator.createURL(getCurrentSite());
+        updateDepartures();
+    }
+
+    void updateDepartures() {
+
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                //String departureURL = DepartureURLCreator.createURL(getCurrentSite());
+
+                try {
+
+                    //HARDCODED FOR NOW
+                    String departureURL = "http://api.sl.se/api2/realtimedepartures.xml?key=985c280f5aab414d9584b8a58230a386&siteid=9192&timewindow=15";
 
                     departuresAPIHandle = new URLRequest(departureURL);
 
@@ -113,51 +121,31 @@ public class Model {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
-
-                //MAGIC SAUCE:
-                Runnable busTextThread = new Runnable() {
+                //MAGIC SAUCE: 
+                Runnable runOnMainThrad = new Runnable() {
                     @Override
                     public void run() {
                         // This will run on main thread:
-                        busText.setText(nextBusToString());
+                        busText.setText("LOL "+nextBusToString());
                     }
+
                 };
-
-
-                Runnable metroTextThread = new Runnable() {
+                Runnable runOnMainThrad2 = new Runnable() {
                     @Override
                     public void run() {
                         // This will run on main thread:
-                        metroText.setText(nextMetroToString());
-
+                        metroText.setText("LOL "+nextMetroToString());
                     }
                 };
+                busText.post(runOnMainThrad);
+                metroText.post(runOnMainThrad2);
 
-
-                Runnable titleTextThread = new Runnable() {
-                    @Override
-                    public void run() {
-                        // This will run on main thread:
-                        titleText.setText(currentSite.toString());
-                    }
-                };
-
-
-                busText.post(busTextThread);
-                metroText.post(metroTextThread);
-                titleText.post(titleTextThread);
             }
         });
 
+
         thread.start();
-
-
-
-        //updateDepartures();
     }
-
 
     long getTimeStep() {
         return timeStep;
@@ -168,14 +156,7 @@ public class Model {
     }
 
 
-    /**
-     * <Fancy text></Fancy>
-     *
-     * @throws
-     *
-     * @param time The display time
-     * @return Time integer
-     */
+
     String nextMetroToString() {
 
         for (Transport t : transports) {
@@ -187,14 +168,7 @@ public class Model {
         return " ";
     }
 
-    /**
-     * <Fancy text></Fancy>
-     *
-     * @throws
-     *
-     * @param time The display time
-     * @return Time integer
-     */
+
     String nextBusToString() {
 
         for (Transport t : transports) {
@@ -202,17 +176,10 @@ public class Model {
                 return "Buss: " + t.getName() + "  -  "  + t.getTime();
             }
         }
-        return " ";
+        return "";
     }
 
-    /**
-     * <Fancy text></Fancy>
-     *
-     * @throws
-     *
-     * @param time The display time
-     * @return Time integer
-     */
+
     String nextTrainToString() {
 
         for (Transport t : transports) {
@@ -220,7 +187,7 @@ public class Model {
                 return "Pendeltåg: " + t.getName() + "  -  "  + t.getTime();
             }
         }
-    return " ";
+        return " ";
     }
 
 
@@ -243,8 +210,4 @@ public class Model {
 
     String getUserInput(){
         return this.userInput;
-    }
-}
-
-
-
+    }}
