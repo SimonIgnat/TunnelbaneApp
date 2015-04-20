@@ -39,6 +39,11 @@ public class MainActivity extends ActionBarActivity {
     TextView tv;
     Model m;
 
+    TextView busText;
+    TextView metroText;
+    TextView trainText;
+    TextView siteTitle;
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
 
@@ -48,36 +53,32 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        busText = (TextView)findViewById(R.id.busView);
+        metroText = (TextView)findViewById(R.id.metroView);
+        trainText = (TextView)findViewById(R.id.trainView);
 
+        siteTitle = (TextView)findViewById(R.id.siteTitle);
 
-
-
+        busText.setText("");
+        metroText.setText("");
+        trainText.setText("");
+        siteTitle.setText("");
 
         Button btn = (Button)findViewById(R.id.button);
-
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String userInput;
 
                 userInput = ((EditText)findViewById(R.id.editText)).getText().toString();
-
-                Intent intent = new Intent(MainActivity.this, DepartureActivity.class);
-
                 Model m = new Model(userInput);
 
-                ContinuousUpdate cu = new ContinuousUpdate(m);
+                siteTitle.setText(userInput);
 
-
-
-                //intent.putExtra("ContUpdate", (Parcelable) cu);
-
-
-                startActivity(intent);
-
-                finish();
+                busText.setText(m.nextBusToString());
+                metroText.setText(m.nextMetroToString());
+                trainText.setText(m.nextTrainToString());
             }
         });
        }

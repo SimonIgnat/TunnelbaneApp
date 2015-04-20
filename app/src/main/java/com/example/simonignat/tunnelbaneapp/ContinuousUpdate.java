@@ -2,6 +2,8 @@ package com.example.simonignat.tunnelbaneapp;
 
 import android.util.Log;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by simonignat on 2015-04-18.
  */
@@ -33,7 +35,7 @@ class ContinuousUpdate extends Thread{
             model.updateDepartures();
 
             try{
-                sleep(model.getTimeStep());
+                TimeUnit.SECONDS.sleep(model.getTimeStep());
 
             }catch(InterruptedException e){
                 Log.w("Awaken from sleep", "");
