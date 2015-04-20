@@ -21,19 +21,19 @@ public class Model {
     static ArrayList<Transport> transports = new ArrayList<Transport>();
 
 
-    static Site currentSite;
+    Site currentSite;
 
-    static URLRequest siteAPIHandle = null;
-    static URLRequest departuresAPIHandle = null;
+    URLRequest siteAPIHandle = null;
+    URLRequest departuresAPIHandle = null;
 
     String outputString = "hej";
 
-    static String siteXMLStream;
-    static String departuresXMLStream;
+    String siteXMLStream;
+    String departuresXMLStream;
 
     String userInput;
 
-    static XMLParser xmlParser = new XMLParser();
+   XMLParser xmlParser = new XMLParser();
 
     // final String UI = null;
     private int timeStep = 50;
