@@ -76,30 +76,27 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-
-
-
-
                 String userInput;
-                
+
                 EditText editText = (EditText) findViewById(R.id.editText);
 
 
                 userInput = editText.getText().toString();
 
-                //Hide input for user.
+                //Hide keyboard from user.
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 
 
-                Model m = new Model(userInput);
+                Model m = new Model(userInput, busText, metroText, siteTitle);
 
 
-                siteTitle.setText("Slussen");
 
-                busText.setText(m.nextBusToString());
-                metroText.setText(m.nextMetroToString());
-                trainText.setText(m.nextTrainToString());
+                //siteTitle.setText(m.currentSite.toString());
+
+                //busText.setText(m.nextBusToString());
+                //metroText.setText(m.nextMetroToString());
+                //trainText.setText(m.nextTrainToString());
 
             }
         });

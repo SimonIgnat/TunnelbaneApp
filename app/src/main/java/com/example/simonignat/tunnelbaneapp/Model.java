@@ -18,17 +18,23 @@ import static java.nio.charset.StandardCharsets.*;
 
 // Updated 20:15
 
-    
+
 public class Model {
 
 
     static ArrayList<Transport> transports = new ArrayList<Transport>();
 
 
+    Boolean siteInitialized = false;
+
     Site currentSite;
 
     URLRequest siteAPIHandle = null;
     URLRequest departuresAPIHandle = null;
+
+    TextView busText;
+    TextView metroText;
+    TextView titleText;
 
     String outputString = "hej";
 
@@ -44,63 +50,15 @@ public class Model {
 
 
 
-    Model(String uI) {
+    Model(String uI, TextView bV, TextView mV, TextView sT) {
         //final String userInput = uI;
         //this.currentSite = new Site(9000, "Central Stationen", null);
 
+        this.busText = bV;
+        this.metroText = mV;
+        this.titleText = sT;
         setUserInput(uI);
-        initSite();
 
-    }
-
-
-    /**
-     * <Fancy text></Fancy>
-     *
-     * @throws
-     *
-     * @param time The display time
-     * @return Time integer
-     */
-    void initSite() {
-
-
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                //String siteURL = SiteURLCreator.createURL(getUserInput());
-
-
-                try {
-
-                    //HARDCODED FOR NOW
-                    String siteURL = "http://api.sl.se/api2/typeahead.xml?key=f7a9ba6bee8a46f9a8d07629719d3935&searchstring=slussen&stationsonly=true&maxresults=10";
-
-                    siteAPIHandle = new URLRequest(siteURL);
-
-                    siteXMLStream = siteAPIHandle.getResponseFromUrl();
-
-                    Site test = xmlParser.getSiteInfo(new ByteArrayInputStream(siteXMLStream.getBytes(StandardCharsets.UTF_8)));
-
-
-                    Log.w("test", test.toString());
-
-                    setCurrentSite(xmlParser.getSiteInfo(new ByteArrayInputStream(siteXMLStream.getBytes(StandardCharsets.UTF_8))));
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-
-
-
-        updateDepartures();
     }
 
 
@@ -115,16 +73,35 @@ public class Model {
     void updateDepartures() {
 
 
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
 
-                //String departureURL = DepartureURLCreator.createURL(getCurrentSite());
+                //String siteURL = SiteURLCreator.createURL(getUserInput());
+
 
                 try {
 
-                    //HARDCODED FOR NOW
-                    String departureURL = "http://api.sl.se/api2/realtimedepartures.xml?key=985c280f5aab414d9584b8a58230a386&siteid=9192&timewindow=15";
+                 //String siteURL = SiteURLCreator.createURL(getUserInput());
+                 //HARDCODED FOR NOW
+                    String siteURL = "http://api.sl.se/api2/typeahead.xml?key=f7a9ba6bee8a46f9a8d07629719d3935&searchstring=tekniskahogskolan&stationsonly=true&maxresults=10";
+
+                    siteAPIHandle = new URLRequest(siteURL);
+
+                    siteXMLStream = siteAPIHandle.getResponseFromUrl();
+
+                    Site test = xmlParser.getSiteInfo(new ByteArrayInputStream(siteXMLStream.getBytes(StandardCharsets.UTF_8)));
+
+                    Log.w("test", test.toString());
+
+                    setCurrentSite(xmlParser.getSiteInfo(new ByteArrayInputStream(siteXMLStream.getBytes(StandardCharsets.UTF_8))));
+
+
+
+
+
+                    String departureURL = DepartureURLCreator.createURL(getCurrentSite());
 
                     departuresAPIHandle = new URLRequest(departureURL);
 
@@ -137,13 +114,49 @@ public class Model {
                     e.printStackTrace();
                 }
 
+
+
+                //MAGIC SAUCE:
+                Runnable busTextThread = new Runnable() {
+                    @Override
+                    public void run() {
+                        // This will run on main thread:
+                        busText.setText(nextBusToString());
+                    }
+                };
+
+
+                Runnable metroTextThread = new Runnable() {
+                    @Override
+                    public void run() {
+                        // This will run on main thread:
+                        metroText.setText(nextMetroToString());
+
+                    }
+                };
+
+
+                Runnable titleTextThread = new Runnable() {
+                    @Override
+                    public void run() {
+                        // This will run on main thread:
+                        titleText.setText(currentSite.toString());
+                    }
+                };
+
+
+                busText.post(busTextThread);
+                metroText.post(metroTextThread);
+                titleText.post(titleTextThread);
             }
         });
 
-
         thread.start();
-    }
 
+
+
+        //updateDepartures();
+    }
 
 
     long getTimeStep() {
