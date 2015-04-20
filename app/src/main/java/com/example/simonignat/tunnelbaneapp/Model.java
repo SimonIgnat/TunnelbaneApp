@@ -140,11 +140,11 @@ public class Model{
     }
 
     public String nextTrainToString(){
-        Metro tr = null;
+        Train tr = null;
 
         for(Transport t: transports) {
             try {
-                tr = (Metro) t;
+                tr = (Train) t;
             } catch (ClassCastException e) {
                 e.printStackTrace();
             }
