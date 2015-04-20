@@ -22,12 +22,30 @@ import java.net.URL;
 public class URLRequest extends AsyncTask{
         String[] URL = new String[2];
 
+
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     URLRequest(String URL){
         this.URL[0] = URL;
 
 
     }
 
+
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     @Override
     protected Object doInBackground(Object[] params){
           HttpClient httpclient = new DefaultHttpClient(); // Create HTTP Client
@@ -86,6 +104,15 @@ public class URLRequest extends AsyncTask{
         return  resString;
     }
 
+
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     public String getResponseFromUrl() {
         return (String)(doInBackground(this.URL));
     }

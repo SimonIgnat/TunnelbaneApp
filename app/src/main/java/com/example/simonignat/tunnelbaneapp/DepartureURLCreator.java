@@ -13,7 +13,7 @@ package com.example.simonignat.tunnelbaneapp;
 public class DepartureURLCreator {
 
 
-    static final String APIKey = "163f4d0ce1814a90b4d394367ee86601";
+    static final String APIKey = "985c280f5aab414d9584b8a58230a386";
     static final String parseFormat = "xml";
     static final String timeSpan = "10";
 
@@ -23,6 +23,14 @@ public class DepartureURLCreator {
     }
 
 
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     public static String createURL(Site site){
         departureSite = site;
 

@@ -2,6 +2,7 @@ package com.example.simonignat.tunnelbaneapp;
 
 import android.annotation.TargetApi;
 import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -39,6 +41,11 @@ public class MainActivity extends ActionBarActivity {
     TextView tv;
     Model m;
 
+    TextView busText;
+    TextView metroText;
+    TextView trainText;
+    TextView siteTitle;
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
 
@@ -48,13 +55,22 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        metroText = (TextView)findViewById(R.id.metroView);
+
+        busText = (TextView)findViewById(R.id.busView);
+
+        trainText = (TextView)findViewById(R.id.trainView);
+
+        siteTitle = (TextView)findViewById(R.id.siteTitle);
 
 
+        metroText.setText("");
+        busText.setText("");
 
-
+        trainText.setText("");
+        siteTitle.setText("");
 
         Button btn = (Button)findViewById(R.id.button);
-
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,22 +78,26 @@ public class MainActivity extends ActionBarActivity {
 
                 String userInput;
 
-                userInput = ((EditText)findViewById(R.id.editText)).getText().toString();
-
-                Intent intent = new Intent(MainActivity.this, DepartureActivity.class);
-
-                Model m = new Model(userInput);
-
-                ContinuousUpdate cu = new ContinuousUpdate(m);
+                EditText editText = (EditText) findViewById(R.id.editText);
 
 
+                userInput = editText.getText().toString();
 
-                //intent.putExtra("ContUpdate", (Parcelable) cu);
+                //Hide keyboard from user.
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 
 
-                startActivity(intent);
+                Model m = new Model(userInput, busText, metroText, siteTitle);
 
-                finish();
+
+
+                //siteTitle.setText(m.currentSite.toString());
+
+                //busText.setText(m.nextBusToString());
+                //metroText.setText(m.nextMetroToString());
+                //trainText.setText(m.nextTrainToString());
+
             }
         });
        }
