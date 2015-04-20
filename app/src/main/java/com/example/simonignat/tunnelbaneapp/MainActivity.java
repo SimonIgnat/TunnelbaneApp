@@ -2,6 +2,7 @@ package com.example.simonignat.tunnelbaneapp;
 
 import android.annotation.TargetApi;
 import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,14 +55,18 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        busText = (TextView)findViewById(R.id.busView);
         metroText = (TextView)findViewById(R.id.metroView);
+
+        busText = (TextView)findViewById(R.id.busView);
+
         trainText = (TextView)findViewById(R.id.trainView);
 
         siteTitle = (TextView)findViewById(R.id.siteTitle);
 
-        busText.setText("");
+
         metroText.setText("");
+        busText.setText("");
+
         trainText.setText("");
         siteTitle.setText("");
 
@@ -69,9 +75,22 @@ public class MainActivity extends ActionBarActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userInput;
 
-                userInput = ((EditText) findViewById(R.id.editText)).getText().toString();
+
+
+
+
+                String userInput;
+                
+                EditText editText = (EditText) findViewById(R.id.editText);
+
+
+                userInput = editText.getText().toString();
+
+                //Hide input for user.
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+
 
                 Model m = new Model(userInput);
 

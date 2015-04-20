@@ -11,4 +11,5 @@
     <string name="busText">Large Text</string>
     <string name="metroText">Large Text</string>
     <string name="trainText">Large Text</string>
+    <string name="metroImage">metropicture</string>
 </resources>
