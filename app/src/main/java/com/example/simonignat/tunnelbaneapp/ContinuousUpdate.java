@@ -22,6 +22,14 @@ class ContinuousUpdate extends Thread{
     }
 
 
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     void startSimulation(){
         Thread controllerThread = new Thread(MainActivity.controller);
 
@@ -30,6 +38,15 @@ class ContinuousUpdate extends Thread{
         continousDepartureUpdate();
     }
 
+
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     void continousDepartureUpdate(){
         while(true){
             model.updateDepartures();

@@ -39,6 +39,7 @@ public class Model {
     private int timeStep = 50;
 
 
+
     Model(String uI) {
         //final String userInput = uI;
         //this.currentSite = new Site(9000, "Central Stationen", null);
@@ -48,12 +49,18 @@ public class Model {
 
     }
 
+
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     void initSite() {
 
-        /**
-         * BEHÖVS TRÅDAR????
-         *
-         */
+
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -91,6 +98,15 @@ public class Model {
         updateDepartures();
     }
 
+
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     void updateDepartures() {
 
 
@@ -123,6 +139,8 @@ public class Model {
         thread.start();
     }
 
+
+
     long getTimeStep() {
         return timeStep;
     }
@@ -132,7 +150,14 @@ public class Model {
     }
 
 
-
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     String nextMetroToString() {
 
         for (Transport t : transports) {
@@ -144,7 +169,14 @@ public class Model {
         return " ";
     }
 
-
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     String nextBusToString() {
 
         for (Transport t : transports) {
@@ -155,7 +187,14 @@ public class Model {
         return " ";
     }
 
-
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     String nextTrainToString() {
 
         for (Transport t : transports) {

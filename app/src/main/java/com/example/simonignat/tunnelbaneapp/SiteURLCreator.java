@@ -16,6 +16,15 @@ public class SiteURLCreator {
     SiteURLCreator(){
     }
 
+
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     static String createURL(String site){
             userSearchString = site;
 

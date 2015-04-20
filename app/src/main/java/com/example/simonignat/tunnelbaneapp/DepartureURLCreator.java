@@ -23,6 +23,14 @@ public class DepartureURLCreator {
     }
 
 
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     public static String createURL(Site site){
         departureSite = site;
 

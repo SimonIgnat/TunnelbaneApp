@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 /**
  * This class provides access to the GPS if
- * precent in the unit.
+ * present in the unit.
  *
  * @author Malte Gruber 2015
  */
