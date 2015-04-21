@@ -1,5 +1,7 @@
 package com.example.simonignat.tunnelbaneapp;
 
+import android.util.Log;
+
 /**
  * Created by simonignat on 2015-04-18.
  */
@@ -16,10 +18,19 @@ public class SiteURLCreator {
     SiteURLCreator(){
     }
 
+
+    /**
+     * <Fancy text></Fancy>
+     *
+     * @throws
+     *
+     * @param time The display time
+     * @return Time integer
+     */
     static String createURL(String site){
             userSearchString = site;
 
-            return ("http://api.sl.se/api2/typeahead." +
+            return ("api.sl.se/api2/typeahead." +
                    parseFormat +
                    "?key=" +
                    APIKey  +
