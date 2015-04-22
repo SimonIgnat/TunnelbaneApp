@@ -157,27 +157,44 @@ public class XMLParser {
                 event = parser.next();
         }
     }
+    private String stringSpaceAppender(String in, int len){
+        String out=in;
+        for(int i = 0;i<len-in.length();i++)
+            out+=" ";
+        return out;
+    }
+    private int lineSpaces=5;
+    private int destSpaces=24;
+    private String fancyNameCreator(String lineNumber, String destination) {
+        return stringSpaceAppender(lineNumber,lineSpaces)+stringSpaceAppender(destination,destSpaces);
+       // return String.format("%-16s%-50s",lineNumber,destination);
+    }
+
+
     private void parseMetro(XmlPullParser parser) throws XmlPullParserException,IOException{
         parseLine("Metro",parser);
-        transport.add(new Metro(destination +" "+ lineNumber,time));
+        transport.add(new Metro(fancyNameCreator(lineNumber,destination),time));
     }
+
+
+
     private void parseBuses(XmlPullParser parser) throws XmlPullParserException,IOException{
         parseLine("Bus",parser);
-        transport.add(new Bus(destination +" "+ lineNumber,time));
+        transport.add(new Bus(fancyNameCreator(lineNumber,destination),time));
     }
 
     private void parseTrain(XmlPullParser parser) throws XmlPullParserException,IOException{
         parseLine("Train",parser);
-        transport.add(new Train(destination +" "+ lineNumber,time));
+        transport.add(new Train(fancyNameCreator(lineNumber,destination),time));
     }
 
     private void parseTram(XmlPullParser parser) throws XmlPullParserException,IOException{
         parseLine("Tram",parser);
-        transport.add(new Tram(destination +" "+ lineNumber,time));
+        transport.add(new Tram(fancyNameCreator(lineNumber,destination),time));
     }
 
     private void parseBoat(XmlPullParser parser) throws XmlPullParserException,IOException{
         parseLine("Tram",parser);
-        transport.add(new Boat(destination +" "+ lineNumber,time));
+        transport.add(new Boat(fancyNameCreator(lineNumber,destination),time));
     }
 }

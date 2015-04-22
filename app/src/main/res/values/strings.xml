@@ -11,8 +11,4 @@
     <string name="busText">Large Text</string>
     <string name="metroText">Large Text</string>
     <string name="trainText">Large Text</string>
-    <string name="metroImage">metropicture</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="configure">Configure</string>
-    <string name="add_widget">Add widget</string>
 </resources>
